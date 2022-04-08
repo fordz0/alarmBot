@@ -1,0 +1,24 @@
+{
+  "name": "alarmbot",
+  "version": "0.0.1",
+  "description": "Valorant bot for viewing your skin shop and looking at your stats!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pengu1ndev/alarmBot.git"
+  },
+  "author": "Pengu1n",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pengu1ndev/alarmBot/issues"
+  },
+  "homepage": "https://github.com/pengu1ndev/alarmBot#readme",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "unofficial-valorant-api": "^1.0.4"
+  }
+}
