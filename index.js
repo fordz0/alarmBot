@@ -45,7 +45,6 @@ client.on('messageCreate', msg => {
                             };
                         });
                         
-                    msg.reply(mmr.data.currenttierpatched); // Replies to discord user with the accounts competitive rank.
                     } else {
                         msg.reply(`There was an error finding that player.`);
                     }
