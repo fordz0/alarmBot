@@ -21,7 +21,8 @@ module.exports.run = async (client, msg, args) => {
             msg.reply({ embeds: [embed] })
         } else {
             const mmr = await ValorantAPI.getMMR(version, region, name, tag);
-            console.log(mmr)
+            const account = await ValorantAPI.getAccount(name, tag)
+
             if (mmr.status == 200) {
                 request(url, options, (error, res, body) => {
                     if (error) {
@@ -34,6 +35,7 @@ module.exports.run = async (client, msg, args) => {
                             .setTitle(name + "'s Rank")
                             .setDescription(mmr.data.currenttierpatched)
                             .setImage(body.data[3].tiers[mmr.data.currenttier].largeIcon)
+                            .setThumbnail(account.data.card.small)
 
                         msg.reply({ embeds: [embed] })
                     };
