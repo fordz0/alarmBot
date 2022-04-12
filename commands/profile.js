@@ -92,10 +92,11 @@ module.exports.run = async (client, msg, args) => {
             totalDeaths = matchAccount1.stats.deaths + matchAccount2.stats.deaths + matchAccount3.stats.deaths + matchAccount4.stats.deaths + matchAccount5.stats.deaths + matchAccount6.stats.deaths + matchAccount7.stats.deaths + matchAccount8.stats.deaths + matchAccount9.stats.deaths + matchAccount10.stats.deaths;
 
             kd = (totalKills/totalDeaths).toFixed(2);
-            console.log(kd);
         } catch (err) {
             console.log(err)
         }
+        
+
     }
     fetchAccount("na", userName, userTag);
 }
