@@ -38,7 +38,7 @@ module.exports.run = async (client, msg, args) => {
             console.log(err)
         }
 
-        if (matches.status == 200) {
+        if (matches.status == 200 && account.status == 200) {
             const embed = new Discord.MessageEmbed()
                 .setColor(0x3498DB)
                 .setTitle(name + "'s Match History")
