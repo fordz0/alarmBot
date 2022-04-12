@@ -3,6 +3,8 @@ const ValorantAPI = require("unofficial-valorant-api");
 const request = require('request');
 
 module.exports.run = async (client, msg, args) => {
+    let url = "https://valorant-api.com/v1/competitivetiers";
+    let options = {json: true};
     const parsedArgs = args
     parsedArgs.shift()
     const userName = parsedArgs.join(' ').split('#')[0]
@@ -11,6 +13,7 @@ module.exports.run = async (client, msg, args) => {
     async function fetchAccount(region, name, tag) {
         const matches = await ValorantAPI.getMatches(region, name, tag);
         const account = await ValorantAPI.getAccount(name, tag);
+        const mmr = await ValorantAPI.getMMR("v1", region, name, tag)
 
         let matchAccount1
         let matchAccount2
@@ -62,15 +65,17 @@ module.exports.run = async (client, msg, args) => {
             console.log(err)
         }
 
-        if (matches.status == 200 && account.status == 200) {
+        if (matches.status == 200 && account.status == 200 && mmr.status == 200) {
             const embed = new Discord.MessageEmbed()
                 .setColor(0x3498DB)
                 .setTitle(name + "#" + tag + "'s Profile")
                 .addFields(
                     { name: 'Level', value: String(account.data.account_level), inline: true },
                     { name: 'K/D Rate (Last 5 Matches)', value: String(kd), inline: true },
+                    { name: 'Ranked', value: String(mmr.data.currenttierpatched), inline: true }
                 )
                 .setImage(account.data.card.wide)
+                .setThumbnail(body.data[3].tiers[mmr.data.currenttier].smallIcon)
             msg.reply({ embeds: [embed] })
         }
 
