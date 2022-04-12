@@ -27,7 +27,7 @@ client.on('ready', () => {
 
     setInterval(() => {
         let membersCount = client.guilds.cache.map(guild => guild.memberCount).reduce((a, b) => a + b, 0)
-        client.user.setActivity(`[${membersCount}] Players`, {type: "PLAYING"});
+        client.user.setActivity(`${membersCount} gamers`, {type: "PLAYING"});
     }, 1000 * 60);
 });
 
