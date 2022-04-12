@@ -66,19 +66,27 @@ module.exports.run = async (client, msg, args) => {
         }
 
         if (matches.status == 200 && account.status == 200 && mmr.status == 200) {
-            const embed = new Discord.MessageEmbed()
-                .setColor(0x3498DB)
-                .setTitle(name + "#" + tag + "'s Profile")
-                .addFields(
-                    { name: 'Level', value: String(account.data.account_level), inline: true },
-                    { name: 'K/D Rate (Last 5 Matches)', value: String(kd), inline: true },
-                    { name: 'Ranked', value: String(mmr.data.currenttierpatched), inline: true }
-                )
-                .setImage(account.data.card.wide)
-                .setThumbnail(body.data[3].tiers[mmr.data.currenttier].smallIcon)
-            msg.reply({ embeds: [embed] })
+            request(url, options, (error, res, body) => {
+                if (error) {
+                    return  console.log(error)
+                };
+                if (!error && res.statusCode == 200) {
+                    const embed = new Discord.MessageEmbed()
+                        .setColor(0x3498DB)
+                        .setTitle(name + "#" + tag + "'s Profile")
+                        .addFields(
+                            { name: 'Level', value: String(account.data.account_level), inline: true },
+                            { name: 'K/D Rate (Last 5 Matches)', value: String(kd), inline: true },
+                            { name: 'Ranked', value: String(mmr.data.currenttierpatched), inline: true }
+                        )
+                        .setImage(account.data.card.wide)
+                        .setThumbnail(body.data[3].tiers[mmr.data.currenttier].smallIcon)
+                    msg.reply({ embeds: [embed] })
+                };
+            });
+        } else {
+            msg.reply(`There was an error finding that player.`)
         }
-
     }
     fetchAccount("na", userName, userTag);
 }
