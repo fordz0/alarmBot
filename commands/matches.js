@@ -10,7 +10,7 @@ module.exports.run = async (client, msg, args) => {
 
     async function fetchMatches(region, name, tag) {
         const matches = await ValorantAPI.getMatches(region, name, tag);
-        const account = await ValorantAPI.getAccount(name, tag)
+        const account = await ValorantAPI.getAccount(name, tag);
 
         let matchAccount1
         let matchAccount2
