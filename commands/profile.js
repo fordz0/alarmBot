@@ -9,7 +9,7 @@ module.exports.run = async (client, msg, args) => {
     const userTag = parsedArgs.join(' ').split('#')[1]
 
     async function fetchAccount(region, name, tag) {
-        const matches = await ValorantAPI.getMatches(region, name, tag, "10");
+        const matches = await ValorantAPI.getMatches(region, name, tag);
         const account = await ValorantAPI.getAccount(name, tag);
 
         let matchAccount1
@@ -17,15 +17,10 @@ module.exports.run = async (client, msg, args) => {
         let matchAccount3
         let matchAccount4
         let matchAccount5
-        let matchAccount6
-        let matchAccount7
-        let matchAccount8
-        let matchAccount9
-        let matchAccount10
 
-        let totalKills
-        let totalDeaths
-        let kd
+        let totalKills = 0;
+        let totalDeaths = 0;
+        let kd = 0.00;
 
         try {
             matches.data[0].players.all_players.forEach(element => {
@@ -48,7 +43,7 @@ module.exports.run = async (client, msg, args) => {
 
             matches.data[3].players.all_players.forEach(element => {
                 if (element.name.toLowerCase() == name.toLowerCase() && element.tag.toLowerCase() == tag.toLowerCase()) {
-                    matchAccoun4 = element
+                    matchAccount4 = element
                 }
             })
 
@@ -58,44 +53,26 @@ module.exports.run = async (client, msg, args) => {
                 }
             })
 
-            matches.data[5].players.all_players.forEach(element => {
-                if (element.name.toLowerCase() == name.toLowerCase() && element.tag.toLowerCase() == tag.toLowerCase()) {
-                    matchAccount6 = element
-                }
-            })
-
-            matches.data[6].players.all_players.forEach(element => {
-                if (element.name.toLowerCase() == name.toLowerCase() && element.tag.toLowerCase() == tag.toLowerCase()) {
-                    matchAccount7 = element
-                }
-            })
-
-            matches.data[7].players.all_players.forEach(element => {
-                if (element.name.toLowerCase() == name.toLowerCase() && element.tag.toLowerCase() == tag.toLowerCase()) {
-                    matchAccount8 = element
-                }
-            })
-
-            matches.data[8].players.all_players.forEach(element => {
-                if (element.name.toLowerCase() == name.toLowerCase() && element.tag.toLowerCase() == tag.toLowerCase()) {
-                    matchAccount9 = element
-                }
-            })
-
-            matches.data[9].players.all_players.forEach(element => {
-                if (element.name.toLowerCase() == name.toLowerCase() && element.tag.toLowerCase() == tag.toLowerCase()) {
-                    matchAccount10 = element
-                }
-            })
-
-            totalKills = matchAccount1.stats.kills + matchAccount2.stats.kills + matchAccount3.stats.kills + matchAccount4.stats.kills + matchAccount5.stats.kills + matchAccount6.stats.kills + matchAccount7.stats.kills + matchAccount8.stats.kills + matchAccount9.stats.kills + matchAccount10.stats.kills;
-            totalDeaths = matchAccount1.stats.deaths + matchAccount2.stats.deaths + matchAccount3.stats.deaths + matchAccount4.stats.deaths + matchAccount5.stats.deaths + matchAccount6.stats.deaths + matchAccount7.stats.deaths + matchAccount8.stats.deaths + matchAccount9.stats.deaths + matchAccount10.stats.deaths;
-
+            totalKills = parseFloat(matchAccount1.stats.kills) + parseFloat(matchAccount2.stats.kills) + parseFloat(matchAccount3.stats.kills) + parseFloat(matchAccount4.stats.kills) + parseFloat(matchAccount5.stats.kills);
+            totalDeaths = parseFloat(matchAccount1.stats.deaths) + parseFloat(matchAccount2.stats.deaths) + parseFloat(matchAccount3.stats.deaths) + parseFloat(matchAccount4.stats.deaths) + parseFloat(matchAccount5.stats.deaths);
+            console.log(totalKills + " " + totalDeaths)
             kd = (totalKills/totalDeaths).toFixed(2);
+            console.log(kd)
         } catch (err) {
             console.log(err)
         }
-        
+
+        if (matches.status == 200 && account.status == 200) {
+            const embed = new Discord.MessageEmbed()
+                .setColor(0x3498DB)
+                .setTitle(name + "#" + tag + "'s Profile")
+                .addFields(
+                    { name: 'Level', value: String(account.data.account_level), inline: true },
+                    { name: 'K/D Rate (Last 5 Matches)', value: String(kd), inline: true },
+                )
+                .setImage(account.data.card.wide)
+            msg.reply({ embeds: [embed] })
+        }
 
     }
     fetchAccount("na", userName, userTag);
