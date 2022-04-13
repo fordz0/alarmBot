@@ -47,7 +47,6 @@ client.on('messageCreate', async(msg)  => {
     const args = msg.content.trim().split(/ +/g);
     const cmd = args[0];
 
-    console.log(args.length)
     if(args.length == 1 && cmd != "*link") {
         await mongo().then(async (mongoose) => {
             try{
