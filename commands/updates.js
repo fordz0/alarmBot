@@ -6,7 +6,7 @@ module.exports.run = async (client, msg, args) => {
     let role = msg.guild.roles.cache.find(role => role.name === 'AlarmBot Updates')
     msg.member.roles.add(role)
 
-    msg.reply("Added AlarmBot Updates Role.")
+    msg.react("✅")
 }
 
 module.exports.help = {

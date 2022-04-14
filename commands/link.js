@@ -24,7 +24,7 @@ module.exports.run = async (client, msg, args) => {
                 }
                 )
                 .exec()
-                msg.reply('RiotID linked to DiscordID!')
+                msg.react('✅')
             } finally {
                 mongoose.connection.close()
             }
