@@ -8,7 +8,7 @@ module.exports.run = async (client, msg, args) => {
     let howToUse;
     let example;
 
-    if (args.length == 1) {
+    if (args.length == 0) {
         const embed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle("Commands:")
@@ -20,7 +20,7 @@ module.exports.run = async (client, msg, args) => {
 
         msg.reply({ embeds: [embed] })
 
-    } else if (args.length == 2) {
+    } else if (args.length == 1) {
         switch (String(parsedArgs).toLowerCase()) {
             case "help":
                 command = "Help";
