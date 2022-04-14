@@ -6,7 +6,7 @@ const linkSchema = mongoose.Schema({
         required: true
     },
 
-    riotID: {
+    puuid: {
         type: String,
         required: true
     }

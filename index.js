@@ -4,6 +4,7 @@ const mongo = require('./mongo')
 const linkSchema = require('./schemas/link-schema')
 const fs = require('fs');
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
+const ValorantAPI = require('unofficial-valorant-api')
 client.commands = new Discord.Collection()
 
 fs.readdir("./commands/", (err, files) => {
@@ -53,7 +54,12 @@ client.on('messageCreate', async(msg)  => {
                 const result = await linkSchema.find({
                     _id: String(msg.author.id),
                 })
-                args.push(String(result[0].riotID))
+                
+                const mmr = await ValorantAPI.getMMRByPUUID("v1", "na", result[0].puuid)
+                
+                const riotID = String(mmr.data.name + "#" + mmr.data.tag)
+
+                args.push(riotID)
             } finally {
                 mongoose.connection.close()
             }
