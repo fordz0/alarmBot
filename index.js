@@ -48,7 +48,7 @@ client.on('messageCreate', async(msg)  => {
     const args = msg.content.trim().split(/ +/g);
     const cmd = args[0];
 
-    if(args.length == 1 && cmd != "*link" && cmd != "*help" && cmd != "*updates") {
+    if(args.length == 1 && cmd != "*link" && cmd != "*help" && cmd != "*updates" && cmd != "*skins") {
         await mongo().then(async (mongoose) => {
             try{
                 const result = await linkSchema.find({
