@@ -58,6 +58,12 @@ module.exports.run = async (client, msg, args) => {
                 example = "just do `*updates` lol"
                 description = "Adds 'AlarmBot Updates' role to use.";
                 break;
+            case "skins":
+                command = "Skins";
+                howToUse = "`*skins {valid skin type}`";
+                example = "`*skins glitchpop`";
+                description = "Shows all weapons that can have the specified skin.";
+                break;
             default:
                 msg.reply("Not an existing command.")
         }
