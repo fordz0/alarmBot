@@ -12,7 +12,7 @@ module.exports.run = async (client, msg, args) => {
         const embed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle("Commands:")
-            .setDescription("`help`, `link`, `matches`, `profile`, `rank`, `updates`")
+            .setDescription("`help`, `link`, `matches`, `profile`, `rank`, `updates`, `skins`")
             .addFields(
                 { name: 'How To Use', value: '`*help {command}`'},
                 { name: 'Example', value: '`*help matches`'}
