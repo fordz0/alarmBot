@@ -27,8 +27,7 @@ client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
     setInterval(() => {
-        let membersCount = client.guilds.cache.map(guild => guild.memberCount).reduce((a, b) => a + b, 0)
-        client.user.setActivity(`${membersCount} gamers`, {type: "PLAYING"});
+        client.user.setActivity(`${client.guilds.cache.size} servers`, {type: "LISTENING"});
     }, 1000 * 60);
 
     await mongo().then(mongoose => {
