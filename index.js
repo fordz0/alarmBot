@@ -26,10 +26,9 @@ fs.readdir("./commands/", (err, files) => {
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
-    client.user.setActivity(`${client.guilds.cache.size} servers`, {
-        type: "STREAMING",
-        url: "https://benjf.dev"
-      });
+    setInterval(() => {
+        client.user.setActivity(`${client.guilds.cache.size} servers`, {type: "LISTENING"});
+    }, 1000 * 60);
 
     await mongo().then(mongoose => {
         try {
