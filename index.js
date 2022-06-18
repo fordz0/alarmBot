@@ -27,7 +27,7 @@ client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
     setInterval(() => {
-        client.user.setActivity(`${client.guilds.cache.size} servers`, {type: "LISTENING"});
+        client.user.setActivity(`${client.guilds.cache.size} servers`, {type: "STREAMING"});
     }, 1000 * 60);
 
     await mongo().then(mongoose => {
