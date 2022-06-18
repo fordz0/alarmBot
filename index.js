@@ -26,7 +26,10 @@ fs.readdir("./commands/", (err, files) => {
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
-    client.user.setPresence(`${client.guilds.cache.size} servers`, {type: "STREAMING"});
+    client.user.setActivity(`${client.guilds.cache.size} servers`, {
+        type: "STREAMING",
+        url: "https://benjf.dev"
+      });
 
     await mongo().then(mongoose => {
         try {
